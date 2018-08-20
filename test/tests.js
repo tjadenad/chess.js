@@ -641,6 +641,22 @@ describe("Load PGN", function() {
       sloppy: true
     },
 
+    // the sloppy parser should handle unnecessarily disambiguated moves
+    // (e.g. Nfg5  in #12 below)
+    {pgn: [
+      // before
+      // '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6',
+      // 'Nxf6 8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6'],
+      // fen: 'r1b1kb1r/1p4pp/pqn2n2/2p5/3p4/N2P1N2/PP1B1PPP/R2QKB1R w KQkq - 4 12',
+      // after
+      '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6',
+      'Nxf6 8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 12. Nfg5'],
+      fen: 'r1b1kb1r/1p4pp/pqn2n2/2p3N1/3p4/N2P4/PP1B1PPP/R2QKB1R b KQkq - 5 12',
+      expect: true,
+      sloppy: true,
+      only: true
+    },
+
 
     // the sloppy parser should handle lazy disambiguation (e.g. Rc1c4 below)
     {pgn: [
